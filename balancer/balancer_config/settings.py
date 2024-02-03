@@ -14,6 +14,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    "rest_framework",
+
     'user',
     'operations',
     'category',
@@ -71,6 +73,14 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
+    ]
+}
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
