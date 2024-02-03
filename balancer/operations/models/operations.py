@@ -21,16 +21,17 @@ class Operation(models.Model):
         MINUS = 'minus', 'Minus'
         PLUS = 'plus', 'Plus'
 
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='operations')
     type = models.CharField(max_length=15, choices=OperationType.choices)
     amount = models.CharField(validators=[amount_validators], max_length=256)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 
 class OperationsHistory(models.Model):
     user = models.ForeignKey(BalancerUser, on_delete=models.CASCADE)
-    operation = models.ForeignKey(Operation, on_delete=models.CASCADE)
-    date_time = models.DateTimeField(auto_now_add=True)
+    operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='history')
     new_balance = models.CharField(max_length=256)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'user: <{self.user}>; OPR: <{self.operation}>'
